@@ -1,0 +1,179 @@
+public class GumballMachine
+{
+
+   protected int num_gumballs;
+   public GumballMachine( int size )
+    {
+        
+        this.num_gumballs = size;
+        
+    }
+}
+
+
+public class FirstMachine extends GumballMachine
+{
+	private boolean has_quarter;
+
+	public FirstMachine(int size) 
+	{
+		super(size);
+	}
+	public void insertQuarter(int coin)
+    {
+        if ( coin == 25 )
+            this.has_quarter = true ;
+        else 
+            this.has_quarter = false ;
+    }
+    
+    public void turnCrank()
+    {
+    	if ( this.has_quarter )
+    	{
+    		if ( this.num_gumballs > 0 )
+    		{
+    			this.num_gumballs-- ;
+    			this.has_quarter = false ;
+    			System.out.println( "Thanks for your quarter.  Gumball Ejected!" ) ;
+    		}
+    		else
+    		{
+    			System.out.println( "No More Gumballs!  Sorry, can't return your quarter." ) ;
+    		}
+    	}
+    	else 
+    	{
+    		System.out.println( "Please insert a quarter" ) ;
+    	}        
+    }
+}
+
+
+public class SecondMachine extends GumballMachine
+{
+	public SecondMachine(int size) {
+		super(size);
+		}
+	boolean has_quarter1;
+    boolean has_quarter2;
+    int coin1;
+    int coin2;
+	public void insertQuarter(int coin1,int coin2)
+    {
+        if(coin1==25 && coin2==25)
+{
+        	if ( coin1+coin2 == 50 )
+{
+    this.has_quarter1 = true;
+    this.has_quarter2=true;
+}
+else 
+{
+    this.has_quarter1 = false ;
+    this.has_quarter2=false;
+}
+}
+        else{
+        	System.out.println("Please insert quarters only...");
+        }
+		
+    }
+	public void turncrank()
+	{
+		if(this.has_quarter1 && this.has_quarter2)
+		{
+		if ( this.num_gumballs > 0 )
+		{
+			this.num_gumballs-- ;
+			this.has_quarter1 = false ;
+			this.has_quarter2=false;
+			System.out.println( "Thanks for your quarters.  Gumball Ejected!" ) ;
+		}
+		else
+		{
+			System.out.println( "No More Gumballs!  Sorry, can't return your quarter." ) ;
+		}
+	    }
+	else 
+	{
+		System.out.println( "Please insert a quarter" ) ;
+	}        	
+		
+	}
+	}
+
+
+
+public class ThirdMachine extends GumballMachine
+{
+	private int amount;
+	private int change;
+	public ThirdMachine(int size) {
+		super(size);
+		
+	}
+	
+	public void insertCent() {
+		this.amount++;
+	}
+	
+	public void insertDime() {
+		this.amount += 10;
+	}
+	
+	public void insertNickel() {
+		this.amount += 5;
+	}
+	
+	public void insertQuarter() {
+		this.amount += 25;
+	}
+	
+	public void turnCrank() 
+	{
+		if(this.amount >= 50) {
+			this.change = (this.amount -= 50);
+			this.amount = 0;
+			System.out.println("Gumball Ejected!!! Please take the change: " + this.change);
+			this.change = 0;
+		} else
+		{
+			System.out.println("OOPS! Entered coins are not enough to eject gumballs, please insert coins!!!");
+		}
+	}
+
+}
+
+public class Main 
+{
+	public static void main(String[] args) 
+	{
+		//GumballMachine gumballMachine = new GumballMachine(5);
+		FirstMachine fm=new FirstMachine(1);
+		SecondMachine sm=new SecondMachine(20);
+		ThirdMachine tm=new ThirdMachine(20);
+		System.out.println(fm);
+		fm.insertQuarter( 25 );
+		fm.turnCrank();
+		fm.insertQuarter( 25 );
+		fm.turnCrank();
+        System.out.println(fm);
+        System.out.println(sm);
+        sm.insertQuarter(25,25);
+        sm.turncrank();
+        System.out.println(tm);
+        tm.insertDime();
+        tm.insertDime();
+        tm.turnCrank();
+        tm.insertQuarter();
+        tm.insertNickel();
+        tm.insertNickel();
+        tm.turnCrank();
+
+        
+		
+	}
+
+}
+
